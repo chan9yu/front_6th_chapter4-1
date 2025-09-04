@@ -1,6 +1,11 @@
+import { SPARouter, useRouter } from "@hanghae-plus/lib";
+
 import { router } from "../router";
-import { useRouter } from "@hanghae-plus/lib";
 
 export const useCurrentPage = () => {
-  return useRouter(router, ({ target }) => target);
+  if (router instanceof SPARouter) {
+    return useRouter(router, ({ target }) => target);
+  }
+
+  throw new Error("router is not SPARouter instance!");
 };

@@ -1,10 +1,15 @@
+import { SPARouter, useRouter } from "@hanghae-plus/lib";
+
 import { router } from "../router";
-import { useRouter } from "@hanghae-plus/lib";
 
 type Params = Record<string, string | undefined>;
 
 const defaultSelector = <S>(params: Params) => params as S;
 
 export const useRouterParams = <S>(selector = defaultSelector<S>) => {
-  return useRouter(router, ({ params }) => selector(params));
+  if (router instanceof SPARouter) {
+    return useRouter(router, ({ params }) => selector(params));
+  }
+
+  throw new Error("router is not SPARouter instance!");
 };

@@ -1,6 +1,11 @@
-// 글로벌 라우터 인스턴스
-import { Router } from "@hanghae-plus/lib";
-import { BASE_URL } from "../constants";
+import { SPARouter, ServerRouter, type BaseRouter } from "@hanghae-plus/lib";
 import type { FunctionComponent } from "react";
 
-export const router = new Router<FunctionComponent>(BASE_URL);
+import { BASE_URL } from "../constants";
+import { isServer } from "../utils";
+
+function createRouter(): BaseRouter<FunctionComponent> {
+  return isServer() ? new ServerRouter() : new SPARouter(BASE_URL);
+}
+
+export const router = createRouter();
