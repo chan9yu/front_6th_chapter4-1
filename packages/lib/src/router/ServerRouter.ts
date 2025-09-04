@@ -34,6 +34,10 @@ export class ServerRouter<Handler extends AnyFunction> extends BaseRouter<Handle
     // 서버사이드에서는 쿼리 설정을 무시
   }
 
+  get subscribe() {
+    return () => () => {};
+  }
+
   public addRoute(path: string, handler: Handler) {
     const paramNames: string[] = [];
     let regexPath = path

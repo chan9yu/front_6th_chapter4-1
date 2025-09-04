@@ -99,6 +99,7 @@ export abstract class BaseRouter<Handler extends AnyFunction> {
 
   abstract get query(): StringRecord;
   abstract set query(newQuery: QueryPayload);
+  abstract get subscribe(): (callback: () => void) => () => void;
   protected abstract parseUrl(url?: string): URL;
   public abstract addRoute(path: string, handler: Handler): void;
   public abstract push(url: string): void;
