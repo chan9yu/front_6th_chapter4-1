@@ -16,6 +16,8 @@ export interface QueryPayload {
   readonly [key: string]: string | number | undefined;
 }
 
+export type RouterInstance = InstanceType<typeof BaseRouter<AnyFunction>>;
+
 export abstract class BaseRouter<Handler extends AnyFunction> {
   protected static parseQuery(search = "") {
     const params = new URLSearchParams(search);
